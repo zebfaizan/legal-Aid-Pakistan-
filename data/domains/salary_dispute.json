@@ -1,0 +1,150 @@
+{
+  "domain": "salary_dispute",
+  "version": "2.0",
+  "description": "Complete decision tree for salary non-payment, unlawful termination, and full & final settlement",
+  "decision_tree": {
+    "question_id": "Q1",
+    "text": "Kis type ka masla hai? (salary_pending / termination_settlement / overtime / bonus / unlawful_termination)",
+    "options": [
+      {
+        "value": "overtime",
+        "next": "Q2"
+      },
+      {
+        "value": "bonus",
+        "output": "Bonus company policy par depend karta hai. Agar company ne written mein promise kiya tha (appointment letter ya policy mein) to claim kar sakte ho. Warna ye legal right nahi hai. Agar promise tha to HR ko written complaint do.",
+        "next": null
+      },
+      {
+        "value": "salary_pending",
+        "next": "Q3"
+      },
+      {
+        "value": "termination_settlement",
+        "next": "Q4"
+      },
+      {
+        "value": "unlawful_termination",
+        "next": "Q5"
+      }
+    ]
+  },
+  "questions": {
+    "Q2": {
+      "text": "Overtime ka paisa kitne mahine se pending hai?",
+      "options": [
+        {
+          "value": "less_than_3",
+          "output": "Pehle HR ko likhit complaint do. Agar 15 din mein na milay to Factory Act 1934 ke tehat Labor Court mein claim kar sakte ho. Overtime ke liye record zaroori hai (attendance sheet, salary slip).",
+          "next": null
+        },
+        {
+          "value": "more_than_3",
+          "output": "Ab Labor Court jao. 3 mahine se zyada pending hai to court double bhi laga sakti hai. Pehle legal notice bhejo (template available hai). Phir Labor Court mein claim do.",
+          "next": null
+        }
+      ]
+    },
+    "Q3": {
+      "text": "Kya aap abhi bhi company mein kaam kar rahe ho?",
+      "options": [
+        {
+          "value": "yes",
+          "next": "Q6"
+        },
+        {
+          "value": "no",
+          "output": "Agar aap ne resign kar diya hai to company ko full and final settlement dena parega. Pehle HR ko written application do. 15 din baad agar na milay to Labor Court jao. Agar company ne unlawfully terminate kiya hai to 'unlawful_termination' option select karo.",
+          "next": null
+        }
+      ]
+    },
+    "Q4": {
+      "text": "Company ne aapko termination letter diya?",
+      "options": [
+        {
+          "value": "no",
+          "output": "Termination letter mango. Agar na dein to ye unlawful termination hai. 'unlawful_termination' option select karo.",
+          "next": null
+        },
+        {
+          "value": "yes",
+          "next": "Q7"
+        }
+      ]
+    },
+    "Q5": {
+      "text": "Company ne aapko kaise terminate kiya?",
+      "options": [
+        {
+          "value": "bina_waja",
+          "output": "Ye unlawful termination hai. Aap Labor Court mein 30 din andar petition daal sakte ho. Reinstatement (waapas job) + back salary (pichli tankhwah) maang sakte ho.",
+          "next": null
+        },
+        {
+          "value": "bina_notice",
+          "output": "Standing Orders Ordinance 1968 ke mutabiq, company ko notice dena zaroori hai (ya salary in lieu). Agar nahi diya to unlawful hai. Labor Court jao.",
+          "next": null
+        },
+        {
+          "value": "paisa_na_dene_ke_liye",
+          "output": "Ye illegal hai. Labor Court mein complaint do. Court company ko penalty laga sakti hai.",
+          "next": null
+        }
+      ]
+    },
+    "Q6": {
+      "text": "Kya aap ne HR ya manager ko LIKHIT complaint di hai? (Email best hai)",
+      "options": [
+        {
+          "value": "no",
+          "output": "PEHLA STEP: HR ko email karo. CC mein apna personal email rakho (record ke liye). Likho: 'Meri [month] ki salary [amount] pending hai. Please issue karein.' 15 din ka time do. Agar 15 din mein na milay to wapas aao.",
+          "next": null
+        },
+        {
+          "value": "yes_15_din_hue",
+          "next": "Q8"
+        },
+        {
+          "value": "yes_15_din_se_kam",
+          "output": "Company ko 15 din ka time do law ke mutabiq. Agar 15 din baad bhi na milay to wapas aao.",
+          "next": null
+        }
+      ]
+    },
+    "Q7": {
+      "text": "Termination letter mein kya likha hai?",
+      "options": [
+        {
+          "value": "full_and_final_likha_hai_lekin_paisa_nahi_diya",
+          "next": "Q8"
+        },
+        {
+          "value": "kuch_nahi_likha_termination_ke_bare_mein",
+          "output": "Ye unlawful termination hai. Labor Court jao. 30 din andar petition daalo.",
+          "next": null
+        },
+        {
+          "value": "notice_period_likha_hai",
+          "output": "Agar notice period likha hai to company notice period ki salary de gi. Agar nahi di to Labor Court jao.",
+          "next": null
+        }
+      ]
+    },
+    "Q8": {
+      "text": "Pending salary ya settlement kitni hai?",
+      "options": [
+        {
+          "value": "less_than_500000",
+          "output": "LABOR COURT JAO: Labor Court mein claim karo. Fee nahi hai. Lawyer zaroori nahi (khud bhi kar sakte ho). TIME: 3-6 months. Kya aapko application template chahiye? Labor Court address: [City name] Labor Court, [location]",
+          "next": null
+        },
+        {
+          "value": "more_than_500000",
+          "output": "CIVIL COURT JAO: Civil Court mein claim karo. Advocate zaroori hai (procedure complicated hai). Pehle legal notice bhejo (template available hai). TIME: 6-12 months.",
+          "next": null
+        }
+      ]
+    }
+  }
+}

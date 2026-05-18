@@ -1,0 +1,148 @@
+{
+  "domain": "police_fir_refusal",
+  "version": "2.0",
+  "description": "Complete decision tree for police FIR refusal as per CrPC Sections 154, 154(3), 22A, 22B",
+  "decision_tree": {
+    "question_id": "Q1",
+    "text": "Kya offense cognizable hai? (Cognizable offenses: qatal, daka, zina-bil-jabar, chori, cheeni, maar-peet, zahar dena, aag lagana)",
+    "options": [
+      {
+        "value": "no",
+        "output": "Ye offense cognizable nahi hai. Police ko FIR lene ki zaroorat nahi hai. Aap Private Complaint Magistrate Court mein kar sakte ho. Kya aapko Private Complaint ka process chahiye?",
+        "next": null
+      },
+      {
+        "value": "yes",
+        "next": "Q2"
+      }
+    ]
+  },
+  "questions": {
+    "Q2": {
+      "text": "Kya aap ne police station ja kar LIKHIT application di hai? (Sirf phone karna ya zabani kehna kafi nahi hai)",
+      "options": [
+        {
+          "value": "nahi_di",
+          "output": "PEHLA STEP: Police station ja kar likhit application do. Application mein likho: date, time, location, kya hua, kisne kiya. Receipt zaroor lena. Yahan se template download karo. Application dene ke baad 3 din baad wapas aao.",
+          "next": null
+        },
+        {
+          "value": "di_lekin_receipt_nahi_li",
+          "output": "Police ko receipt dena farz hai. Wapas jao aur receipt lo. Agar receipt dene se mana karain to unhe batao ke Section 154 CrPC ke under receipt dena unka legal farz hai. Receipt milne ke baad wapas aao.",
+          "next": null
+        },
+        {
+          "value": "di_aur_receipt_li",
+          "next": "Q3"
+        }
+      ]
+    },
+    "Q3": {
+      "text": "Application diye kitne din ho gaye?",
+      "options": [
+        {
+          "value": "less_than_3",
+          "output": "Police ke paas 3 din ka time hai law ke mutabiq. Abhi wait karo. Agar 3 din baad bhi koi action na ho to wapas aao.",
+          "next": null
+        },
+        {
+          "value": "3_to_7",
+          "next": "Q4"
+        },
+        {
+          "value": "7_to_15",
+          "next": "Q4"
+        },
+        {
+          "value": "more_than_15",
+          "next": "Q4"
+        }
+      ]
+    },
+    "Q4": {
+      "text": "Police ne kya kiya?",
+      "options": [
+        {
+          "value": "fir_register_kar_di",
+          "output": "Mubarak ho! FIR register ho gayi. Ab apna FIR case number yaad rakho. Police ko follow up karo. Agar investigation mein delay ho to SP se shikayat karo.",
+          "next": null
+        },
+        {
+          "value": "investigation_kar_rahe_hain",
+          "output": "Police investigation kar rahi hai. Unhe 14 din ka time hai preliminary report ke liye. Agar 14 din baad bhi koi progress na ho to SP ko complain karo.",
+          "next": null
+        },
+        {
+          "value": "kuch_nahi_kiya",
+          "next": "Q5"
+        },
+        {
+          "value": "mana_kar_diya",
+          "next": "Q5"
+        }
+      ]
+    },
+    "Q5": {
+      "text": "Kya aap ne SP (Superintendent of Police) ko application di hai? (Section 154(3) CrPC)",
+      "options": [
+        {
+          "value": "nahi_di",
+          "output": "ABHI KARO: SP ko likhit application do. SP ke paas 15 din hain action lene ke liye. Application mein likho: kab application di, police ne kya kaha, kya hua. SP ka address: [District Police Office]. Application copy apne paas rakho. 15 din baad wapas aao.",
+          "next": null
+        },
+        {
+          "value": "di_hai_15_din_se_kam",
+          "next": "Q6"
+        },
+        {
+          "value": "di_hai_15_din_se_zyada",
+          "next": "Q6"
+        }
+      ]
+    },
+    "Q6": {
+      "text": "SP ne kya kiya?",
+      "options": [
+        {
+          "value": "fir_register_kar_di",
+          "output": "FIR register ho gayi! Ab case number le lo. Police investigation start kare gi. Thank you for following the process.",
+          "next": null
+        },
+        {
+          "value": "order_de_diya_register_karne_ka",
+          "output": "SP ne police station ko FIR register karne ka order de diya. Ab police ko follow up karo. Agar 7 din mein bhi FIR register na ho to wapas SP se rabta karo.",
+          "next": null
+        },
+        {
+          "value": "kuch_nahi_kiya",
+          "next": "Q7"
+        },
+        {
+          "value": "process_mein_hai",
+          "output": "SP ka process chal raha hai. 15 din complete hone do. Phir wapas aao.",
+          "next": null
+        }
+      ]
+    },
+    "Q7": {
+      "text": "SP ne 15 din mein action nahi liya. Ab aap kya karna chahte ho?",
+      "options": [
+        {
+          "value": "session_court_petition",
+          "output": "AB SESSION COURT JAO: Section 22A/22B CrPC ke tehat Session Court mein petition daalo. Court police ko order de ga FIR lene ke liye. Agar police na mani to court direct investigation karaye gi. TIME: 2-4 hearings, 3-6 months. Kya aapko petition template chahiye?",
+          "next": null
+        },
+        {
+          "value": "high_court_petition",
+          "output": "High Court mein writ petition daal sakte ho. Section 199 ke tehat. High Court ka order session court se bhi upper hota hai. LEKIN: Lawyer zaroori hai aur time zyada lage ga (6-12 months).",
+          "next": null
+        },
+        {
+          "value": "lawyer_sey_raabta_karna",
+          "output": "Yeh acha option hai. Kisi criminal lawyer se rabta karo. Woh aapka case file kar de ga. Lawyer ki fee 5000-25000 Rs ho sakti hai depending on city and court.",
+          "next": null
+        }
+      ]
+    }
+  }
+}

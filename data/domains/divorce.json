@@ -1,0 +1,202 @@
+{
+  "domain": "divorce_khula",
+  "version": "2.0",
+  "description": "Complete decision tree for Talaq (husband) and Khula (wife) as per MFLO 1961",
+  "decision_tree": {
+    "question_id": "Q1",
+    "text": "Aap kaun ho? (husband / wife / parent)",
+    "options": [
+      {
+        "value": "parent",
+        "next": "Q2"
+      },
+      {
+        "value": "husband",
+        "next": "Q3"
+      },
+      {
+        "value": "wife",
+        "next": "Q9"
+      }
+    ]
+  },
+  "questions": {
+    "Q2": {
+      "text": "Aap apne bete ya beti ke liye pooch rahe ho?",
+      "options": [
+        {
+          "value": "betay_ke_liye",
+          "output": "Aap direct involved nahi ho. Best hai ke couple ko mediation advise karo. Family Court mein counsellor available hai. Agar wo khud talaq lena chahte hain to woh khud process follow karein. Aap sirf guidance de sakte ho.",
+          "next": null
+        },
+        {
+          "value": "beti_ke_liye",
+          "output": "Aap direct involved nahi ho. Beti ko khud decision lene do. Agar wo khula chahti hai to Family Court mein petition daal sakti hai. Aap uska support kar sakte ho lekin court mein usay khud present hona parega.",
+          "next": null
+        }
+      ]
+    },
+    "Q3": {
+      "text": "Kya aap ne talaq di hai?",
+      "options": [
+        {
+          "value": "nahi_di_abhi",
+          "next": "Q4"
+        },
+        {
+          "value": "di_hai_verbal",
+          "next": "Q5"
+        },
+        {
+          "value": "di_hai_written",
+          "next": "Q5"
+        }
+      ]
+    },
+    "Q4": {
+      "text": "Talaq dene se pehle kya aap mediation try karna chahte ho?",
+      "options": [
+        {
+          "value": "yes",
+          "output": "Acha hai. Arbitration Council ya family members se mediation karo. Agar biwi maan jaye to talaq ki zaroorat nahi. Agar mediation fail ho to talaq ka process start kar sakte ho.",
+          "next": null
+        },
+        {
+          "value": "no",
+          "output": "Talaq ka process: 1) Talaq do (verbal ya written) 2) 15 din andar Union Council mein notify karo 3) Iddat 90 din 4) Biwi ka kharcha iddat mein dena parega 5) Haq Mehr agar baqi hai to dena parega. Kya aap samajh gaye?",
+          "next": null
+        }
+      ]
+    },
+    "Q5": {
+      "text": "Kya aap ne Union Council mein talaq notify kar di hai? (Section 7 MFLO)",
+      "options": [
+        {
+          "value": "nahi_ki",
+          "next": "Q6"
+        },
+        {
+          "value": "kar_di_hai",
+          "next": "Q7"
+        }
+      ]
+    },
+    "Q6": {
+      "text": "Talaq diye kitne din ho gaye?",
+      "options": [
+        {
+          "value": "less_than_15",
+          "output": "ABHI KARO: Union Council jao. Talaq nama (written) ke saath jao. Chairman Union Council talaq register kare ga. Biwi ko notice bhejega. Kya aapko talaq notification form chahiye? Address: Apni Union Council ka address [area name].",
+          "next": null
+        },
+        {
+          "value": "15_to_90",
+          "output": "DER HO GAYI: Phir bhi Union Council jao. Fine lag sakta hai (1000-5000 Rs). Biwi ko iddat period complete karni paregi. Agar biwi pregnant hai to bacche ki delivery tak talaq effective nahi ho gi.",
+          "next": null
+        },
+        {
+          "value": "more_than_90",
+          "output": "TALAQ HO CHUKI: Iddat complete ho gayi. Ab aap dono ajnabi ho sakte ho. Agar dobara shaadi karni hai to naya nikah karna parega. Koi legal action nahi hai ab.",
+          "next": null
+        }
+      ]
+    },
+    "Q7": {
+      "text": "Talaq register ho gayi. Ab aage kya?",
+      "options": [
+        {
+          "value": "iddat_mein_hoon",
+          "output": "Iddat 90 din complete karo. Is doran biwi ka kharcha dena parega (khana, rehna, kapra). Agar biwi pregnant hai to delivery tak kharcha dena parega.",
+          "next": null
+        },
+        {
+          "value": "iddat_complete_ho_gayi",
+          "output": "Talaq final ho gayi. Ab aap dono ka nikah khatam. Haq Mehr agar baqi hai to do. Biwi apni marzi se kahin ja sakti hai.",
+          "next": null
+        },
+        {
+          "value": "bacchon_ki_custody_chahiye",
+          "output": "Custody ka case Family Court mein karo. Maan ko priority lekin baap ko visitation rights. Court bacche ke best interest ke mutabiq decision le gi. Kya aapko custody petition template chahiye?",
+          "next": null
+        }
+      ]
+    },
+    "Q8": {
+      "text": "Biwi ne maintenance maangi hai?",
+      "options": [
+        {
+          "value": "yes",
+          "output": "Iddat period mein biwi ka kharcha dena farz hai. Agar nahi doge to biwi Family Court mein case kar sakti hai. 90 din ke baad maintenance ka koi legal obligation nahi (jab tak bacche nahi hain).",
+          "next": null
+        },
+        {
+          "value": "no",
+          "output": "Agar biwi ne kuch nahi manga to koi issue nahi. Lekin iddat period mein khud de do to sawab hai.",
+          "next": null
+        }
+      ]
+    },
+    "Q9": {
+      "text": "Kya husband talaq dene ko tayyar hai?",
+      "options": [
+        {
+          "value": "yes",
+          "output": "BEST OPTION: Husband khud talaq de de ga. Talaq ka process follow ho ga (upar husband ka section dekhein). Aap ko kuch nahi karna. LEKIN: Is case mein aap ko Haq Mehr nahi mile ga (khula mein aap ko dena padta).",
+          "next": null
+        },
+        {
+          "value": "no",
+          "next": "Q10"
+        }
+      ]
+    },
+    "Q10": {
+      "text": "Kya aap khula (court se talaq) lena chahti ho?",
+      "options": [
+        {
+          "value": "nahi_chahti",
+          "output": "Phir mediation try karo. Koi family member ya arbitrator dono ko baithaye. Agar husband maan jaye to talaq de de ga. Warna court ka rasta hai.",
+          "next": null
+        },
+        {
+          "value": "haan_chahti_hoon",
+          "next": "Q11"
+        }
+      ]
+    },
+    "Q11": {
+      "text": "Kya aap ne Family Court mein khula petition diya hai?",
+      "options": [
+        {
+          "value": "nahi_diya",
+          "output": "KHULA KA PROCESS: 1) Family Court mein petition daalo 2) Court pehle mediation karegi (trying to save marriage) 3) Agar mediation fail to court khula de de gi 4) Aap ko husband ko Haq Mehr vapas dena parega (jo shaadi mein mila tha). TIME: 3-9 months. Kya aapko khula petition template chahiye? Address: Apne city ka Family Court",
+          "next": null
+        },
+        {
+          "value": "diya_hai",
+          "next": "Q12"
+        }
+      ]
+    },
+    "Q12": {
+      "text": "Court ne kya kiya?",
+      "options": [
+        {
+          "value": "mediation_mein_hai",
+          "output": "Court mediation kar rahi hai. Is process mein cooperate karo. Agar husband maan jaye to khula without court order ho sakta hai.",
+          "next": null
+        },
+        {
+          "value": "khula_de_diya",
+          "output": "Mubarak ho! Khula ho gaya. Ab aap free ho. Haq Mehr husband ko de do (agar abhi nahi diya to). Iddat 90 din complete karo phir dobara shaadi kar sakti ho.",
+          "next": null
+        },
+        {
+          "value": "case_pending_hai",
+          "output": "Case pending hai. Court ki dates follow karo. Advocate rakha hai to unsey rabta rakho. Time lag sakta hai (6-9 months).",
+          "next": null
+        }
+      ]
+    }
+  }
+}
